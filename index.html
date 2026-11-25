@@ -41,8 +41,9 @@
 
         try {
           localStorage.setItem("playerName", name);
-          // Clear any old session so every registration starts a fresh game
-          sessionStorage.removeItem("hackoverse_mindmaze_state");
+          // NOTE: the saved game is NOT cleared here. If the same name registers
+          // again, the game continues (or shows the result if it already ended).
+          // A different name starts a fresh game automatically.
         } catch {
           // Ignore storage errors in strict private modes
         }
