@@ -39,7 +39,7 @@
                 }
             ],
             riddle: "Not every entrance is in the front.",              // <-- EDIT RIDDLE 1
-            coordinatorPassword: "123"                                  // <-- EDIT PASSWORD 1
+            coordinatorPassword: "4567"                                  // <-- EDIT PASSWORD 1
         },
 
         // ---------------------------------------------------------------------
@@ -63,7 +63,7 @@
                 }
             ],
             riddle: "Where greetings begin and journeys start.",        // <-- EDIT RIDDLE 2
-            coordinatorPassword: "123"                                  // <-- EDIT PASSWORD 2
+            coordinatorPassword: "7890"                                  // <-- EDIT PASSWORD 2
         },
 
         // ---------------------------------------------------------------------
@@ -87,7 +87,7 @@
                 }
             ],
             riddle: "Where clothes come out fresh and clean.",          // <-- EDIT RIDDLE 3
-            coordinatorPassword: "123"                                  // <-- EDIT PASSWORD 3
+            coordinatorPassword: "7865"                                  // <-- EDIT PASSWORD 3
         },
 
         // ---------------------------------------------------------------------
@@ -111,7 +111,7 @@
                 }
             ],
             riddle: "Where students rest after a long day.",            // <-- EDIT RIDDLE 4
-            coordinatorPassword: "123"                                  // <-- EDIT PASSWORD 4
+            coordinatorPassword: "5678"                                  // <-- EDIT PASSWORD 4
         },
 
         // ---------------------------------------------------------------------
@@ -123,7 +123,7 @@
             question: "Which is the hardest natural substance on Earth?", // <-- EDIT QUESTION 5
             answer: ["Diamond", "Diamonds"],                              // <-- EDIT ANSWER 5
             riddle: "Where players run, shout, and play games.",          // <-- EDIT RIDDLE 5
-            coordinatorPassword: "123"                                    // <-- EDIT PASSWORD 5
+            coordinatorPassword: "8975"                                    // <-- EDIT PASSWORD 5
         },
 
         // ---------------------------------------------------------------------
@@ -135,7 +135,7 @@
             question: "I am an odd number. Remove one letter and I become even. What number am I?", // <-- EDIT QUESTION 6
             answer: ["seven", "7"],                                                                 // <-- EDIT ANSWER 6
             riddle: "Where classes, laughter, and learning meet.",                                  // <-- EDIT RIDDLE 6
-            coordinatorPassword: "123"                                                              // <-- EDIT PASSWORD 6
+            coordinatorPassword: "7854"                                                              // <-- EDIT PASSWORD 6
         },
 
         // ---------------------------------------------------------------------
@@ -153,7 +153,7 @@ else:
     print("You are not eligible to vote.")`,
             answer: ["You are eligible to vote.", "You are eligible to vote"], // <-- EDIT EXPECTED OUTPUT 7
             riddle: "Where food gives energy for the next challenge.",         // <-- EDIT RIDDLE 7
-            coordinatorPassword: "123"                                         // <-- EDIT PASSWORD 7
+            coordinatorPassword: "7896"                                         // <-- EDIT PASSWORD 7
         },
 
         // ---------------------------------------------------------------------
@@ -170,7 +170,7 @@ print(x + y)
 print(x * y)`,
             answer: "15\n50",                                           // <-- EDIT EXPECTED OUTPUT 8
             riddle: "Look for the place where knowledge is kept.",      // <-- EDIT RIDDLE 8
-            coordinatorPassword: "123"                                  // <-- EDIT PASSWORD 8
+            coordinatorPassword: "3456"                                  // <-- EDIT PASSWORD 8
         },
 
         // ---------------------------------------------------------------------
@@ -184,7 +184,7 @@ print(x * y)`,
     print(i * 2)`,
             answer: "2\n4\n6",                                                           // <-- EDIT EXPECTED OUTPUT 9
             riddle: "Find the place where everyone gathers for the final challenge.",    // <-- EDIT RIDDLE 9
-            coordinatorPassword: "123"                                                   // <-- EDIT PASSWORD 9
+            coordinatorPassword: "5678"                                                   // <-- EDIT PASSWORD 9
         }
 
     ];
@@ -232,66 +232,31 @@ print(x * y)`,
     gameScreen.classList.remove("hidden");
 
     // =========================================================================
-    // 6. STRICT ANTI-COPY & ANTI-PASTE SHIELD (ANDROID + iOS + DESKTOP)
+    // 6. ANTI-COPY & ANTI-PASTE PROTECTION (DESKTOP + MOBILE)
     // =========================================================================
-    const lastValidValues = new WeakMap();
-
-    function isPlayerAnswerField(el) {
-        return (
-            el &&
-            (el.tagName === "INPUT" || el.tagName === "TEXTAREA") &&
-            el.id !== "coordPassInput"
-        );
-    }
-
-    // Counts how many brand-new characters were injected in a single event
-    function countInsertedChars(oldStr, newStr) {
-        let prefix = 0;
-        const minLen = Math.min(oldStr.length, newStr.length);
-        while (prefix < minLen && oldStr[prefix] === newStr[prefix]) {
-            prefix++;
-        }
-
-        let suffix = 0;
-        while (
-            suffix < (minLen - prefix) &&
-            oldStr[oldStr.length - 1 - suffix] === newStr[newStr.length - 1 - suffix]
-        ) {
-            suffix++;
-        }
-
-        return newStr.length - prefix - suffix;
-    }
-
     (function enableAntiCopyPaste() {
         const blockEvent = (e) => {
             e.preventDefault();
             return false;
         };
 
-        // 1. Block copy, cut, paste, drag-drop, and long-press/right-click menus globally
+        // Block copy, cut, paste, drag-drop, and right-click menu globally
         ["copy", "cut", "paste", "drop", "dragstart", "contextmenu"].forEach((evt) => {
             document.addEventListener(evt, blockEvent, true);
         });
 
-        // 2. Block text selection on questions/riddles (mobile long-press & desktop drag)
-        document.addEventListener("selectstart", (e) => {
-            if (!isPlayerAnswerField(e.target) && e.target?.id !== "coordPassInput") {
+        // Block mobile clipboard bar pastes (e.g., Gboard / Samsung Keyboard clipboard)
+        document.addEventListener("beforeinput", (e) => {
+            if (
+                e.inputType === "insertFromPaste" ||
+                e.inputType === "insertFromPasteAsQuotation" ||
+                e.inputType === "insertFromDrop"
+            ) {
                 e.preventDefault();
             }
         }, true);
 
-        document.addEventListener("selectionchange", () => {
-            const active = document.activeElement;
-            if (!isPlayerAnswerField(active) && active?.id !== "coordPassInput") {
-                const sel = window.getSelection && window.getSelection();
-                if (sel && sel.toString().length > 0) {
-                    sel.removeAllRanges();
-                }
-            }
-        });
-
-        // 3. Block keyboard shortcuts: Ctrl/Cmd + C, V, X, A, U, S and Shift+Insert
+        // Block keyboard shortcuts: Ctrl/Cmd + C, V, X, A, U, S and Shift+Insert
         document.addEventListener("keydown", (e) => {
             const key = e.key.toLowerCase();
             if ((e.ctrlKey || e.metaKey) && ["c", "v", "x", "a", "u", "s"].includes(key)) {
@@ -300,57 +265,6 @@ print(x * y)`,
             if (e.shiftKey && e.key === "Insert") {
                 e.preventDefault();
             }
-        }, true);
-
-        // 4. First line of defense on mobile keyboards (beforeinput)
-        document.addEventListener("beforeinput", (e) => {
-            const target = e.target;
-            if (!isPlayerAnswerField(target)) return;
-
-            const isPasteType =
-                e.inputType === "insertFromPaste" ||
-                e.inputType === "insertFromPasteAsQuotation" ||
-                e.inputType === "insertFromDrop";
-
-            // Block direct multi-char insertions (skip insertCompositionText so normal Android typing works)
-            const isMultiCharInsert =
-                (e.inputType === "insertText" || e.inputType === "insertReplacementText") &&
-                typeof e.data === "string" &&
-                e.data.length > 1;
-
-            if (isPasteType || isMultiCharInsert) {
-                e.preventDefault();
-                if (!isStageSolved) {
-                    showIncorrectFeedback("Copy & paste is disabled! Please type your answer manually.");
-                }
-            }
-        }, true);
-
-        // 5. Bulletproof fallback for Android Gboard / Samsung / iOS clipboard bars
-        // Catches any clipboard tap that bypasses paste & beforeinput events
-        document.addEventListener("input", (e) => {
-            const target = e.target;
-            if (!isPlayerAnswerField(target)) return;
-
-            const prevVal = lastValidValues.get(target) ?? "";
-            const currentVal = target.value;
-            const inserted = countInsertedChars(prevVal, currentVal);
-
-            if (inserted > 1) {
-                target.value = prevVal;
-                try {
-                    const pos = prevVal.length;
-                    target.setSelectionRange(pos, pos);
-                } catch { /* ignore */ }
-
-                e.stopImmediatePropagation();
-                if (!isStageSolved) {
-                    showIncorrectFeedback("Copy & paste is disabled! Please type your answer manually.");
-                }
-                return;
-            }
-
-            lastValidValues.set(target, currentVal);
         }, true);
     })();
 
@@ -537,7 +451,6 @@ print(x * y)`,
         answerFields.style.display = "none";
 
         participantCode.value = "";
-        lastValidValues.set(participantCode, "");
         participantCode.disabled = false;
         runBtn.disabled = false;
 
@@ -571,7 +484,6 @@ print(x * y)`,
                 input.autocorrect = "off";
                 input.autocapitalize = "off";
                 input.style.cssText = "width:100%;max-width:100%;box-sizing:border-box;text-align:left;";
-                lastValidValues.set(input, "");
 
                 fragment.appendChild(label);
                 fragment.appendChild(input);
