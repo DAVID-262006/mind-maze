@@ -47,19 +47,20 @@
             questions: [
                 {
                     question: "A. What comes next: 2, 6, 12, 20, 30, ___?",
-                    answer: ["42", "forty two", "forty-two"]
+                    answer: ["42", "Forty two", "Forty-two"]
                 },
                 {
                     question: "B. When is Engineer's Day celebrated in India?",
                     answer: [
                         "September 15", "15 September", "15th September", "September 15th",
-                        "Sep 15", "15 Sep", "Sept 15", "15 Sept",
+                        "Sept 15", "15 Sept", "15th Sept", "Sept 15th",
+                        "Sep 15", "15 Sep", "15th Sep", "Sep 15th",
                         "15/09", "15/9", "15-09", "15-9"
                     ]
                 },
                 {
                     question: "C. How many times do the clock hands overlap in 12 hours?",
-                    answer: ["11", "eleven", "11 times", "eleven times"]
+                    answer: ["11", "Eleven", "11 times", "Eleven times"]
                 }
             ],
             riddle: "Not every entrance is in the front.",
@@ -75,7 +76,7 @@
             questions: [
                 {
                     question: "A. Which state in India produces the most coffee?",
-                    answer: "Karnataka"
+                    answer: ["Karnataka"]
                 },
                 {
                     question: "B. Which IPL team has the most Instagram followers?",
@@ -83,7 +84,10 @@
                 },
                 {
                     question: "C. How many months have 28 days?",
-                    answer: ["12", "All 12", "All", "Twelve", "All months", "All 12 months", "12 months"]
+                    answer: [
+                        "12", "All 12", "All", "All months", "All 12 months",
+                        "Twelve", "All twelve", "All twelve months", "Every month"
+                    ]
                 }
             ],
             riddle: "Where greetings begin and visitors arrive.",
@@ -103,7 +107,7 @@
                 },
                 {
                     question: "B. How many times can you subtract 10 from 100?",
-                    answer: ["1", "One", "Once", "1 time", "One time"]
+                    answer: ["1", "One", "Once", "1 time", "One time", "Only once"]
                 },
                 {
                     question: "C. Which company owns Instagram and WhatsApp?",
@@ -165,7 +169,10 @@
             type: "logic",
             title: "GENERAL LOGIC - QUESTION 1",
             question: "A boy's dream about his mother was priceless, but the kingdom he conquered was measured in kilograms. Which Indian movie is this?",
-            answer: ["KGF", "K.G.F", "K.G.F.", "KGF Chapter 1", "K.G.F: Chapter 1", "KGF 1", "Kolar Gold Fields"],
+            answer: [
+                "KGF", "K.G.F", "K.G.F.", "K G F",
+                "KGF Chapter 1", "KGF: Chapter 1", "K.G.F: Chapter 1", "Kolar Gold Fields"
+            ],
             riddle: "Where classes, laughter, and learning meet.",
             coordinatorPasswordHash: "cc1426618cb6931b719e39d5d1c5d88fc2139c8fac986824a40f2e5c169f86e2" // 7854
         },
@@ -187,7 +194,7 @@ print(x)
 
 x = calculate(x)
 print(x)`,
-            answer: ["15\n10\n15", "15 10 15"],
+            answer: ["15\n10\n15", "15 10 15", "15, 10, 15", "15,10,15"],
             riddle: "Where food gives energy for the next challenge.",
             coordinatorPasswordHash: "cad6ddf10c7f185baa569652306063313da25e747d9c7c2ce29f5b1d3bd216cb" // 7896
         },
@@ -210,7 +217,6 @@ print(a)`,
             answer: [
                 "[[10, 30], [20], [10, 30]]",
                 "[[10,30],[20],[10,30]]",
-                "[[10,30], [20], [10,30]]",
                 "[[10, 30],[20],[10, 30]]"
             ],
             riddle: "Look for the place where knowledge is kept.",
@@ -598,7 +604,7 @@ print(sorted(a))`,
         }));
     }
 
-    // Returns "finished", "restored" or "new"
+    // Returns "finished-win", "finished-lose", "restored" or "new"
     function initGameState() {
         const raw = safeGet(localStorage, STATE_KEY);
         if (raw) {
