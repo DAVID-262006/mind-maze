@@ -1,6 +1,10 @@
 (() => {
     "use strict";
 
+    // Wait until the page HTML is fully loaded, so the script works
+    // whether it is placed in <head> or at the end of <body>.
+    function startMindMaze() {
+
     // =========================================================================
     // 1. QUICK CONFIGURATION (EDIT TIMER DURATION HERE)
     // =========================================================================
@@ -331,6 +335,15 @@ print(sorted(a))`,
     const lockContainer = document.getElementById("lockContainer");
     const coordinatorBtn = document.getElementById("coordinatorBtn");
     const solvedCountDisplay = document.getElementById("solvedCount");
+
+    const requiredIds = ["gameScreen", "endScreen", "endMessage", "playerDisplay", "timer",
+        "codeProblem", "participantCode", "runBtn", "outputBox", "outputDisplay",
+        "lockContainer", "coordinatorBtn", "solvedCount"];
+    const missingIds = requiredIds.filter((id) => !document.getElementById(id));
+    if (missingIds.length) {
+        console.error("MindMaze: these id's are missing in main.html: " + missingIds.join(", "));
+        return;
+    }
 
     playerDisplay.textContent = `Welcome, ${playerName}`;
     gameScreen.classList.remove("hidden");
@@ -1086,5 +1099,12 @@ print(sorted(a))`,
         } else {
             startTimer(false);
         }
+    }
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", startMindMaze);
+    } else {
+        startMindMaze();
     }
 })();
