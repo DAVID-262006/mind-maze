@@ -70,13 +70,12 @@
             title: "GENERAL KNOWLEDGE - PAGE 2",
             questions: [
                 {
-                    question: "A. Which state in India produces the most coffee prodution?",
+                    question: "A. Which state in India produces the most coffee?",
                     answer: "KARNATAKA"
                 },
                 {
                     question: "B. Which IPL team has the most Instagram followers?",
-                    answer: ["RCB","ROYAL CHALLENGERS BENGALURU"
-                    ]
+                    answer: ["RCB","ROYAL CHALLENGERS BENGALURU","ROYAL CHALLENGERS BANGALORE"]
                 },
                 {
                     question: "C. How many months have 28 days?",
@@ -141,8 +140,7 @@
         {
             type: "gk",
             title: "GENERAL KNOWLEDGE - PAGE 5",
-            question: "14. A man enters a lift on the 10th floor. He goes down 7 floors, up 4 floors and down 3 floors. Which floor is he on?
-",
+            question: "14. A man enters a lift on the 10th floor. He goes down 7 floors, up 4 floors and down 3 floors. Which floor is he on?",
             answer: ["4","FOUR"],
             riddle: "Where players run, shout, and play games.",
             coordinatorPasswordHash: "5c29bb6d691728a1addd3820fd92b05748447525b8ba9518852512789ab7e7ab" // 8975
@@ -197,7 +195,7 @@ a[2] = a[0]
 a[2].append(30)
 
 print(a)`,
-            answer: ["[[10,30],[20],[10,30]]","[[10 30],[20],[10 30]]"],
+            answer: ["[[10, 30], [20], [10, 30]]","[[10,30],[20],[10,30]]","[[10 30],[20],[10 30]]"],
             riddle: "Look for the place where knowledge is kept.",
             coordinatorPasswordHash: "ceaa28bba4caba687dc31b1bbe79eca3c70c33f871f1ce8f528cf9ab5cfd76dd" // 3456
         },
@@ -217,7 +215,7 @@ for i in sorted(a):
         a.add(i + 5)
 
 print(sorted(a))`,
-            answer: ["[1,3,5,6,8,10]","[1,3,5,6,8,10]"],
+            answer: ["[1, 3, 5, 6, 8, 10]","[1,3,5,6,8,10]"],
             riddle: "Find the place where everyone gathers for the final challenge.",
             coordinatorPasswordHash: "f8638b979b2f4f793ddb6dbd197e0ee25a7a6ea32b0ae22f5e3c5d119d839e75", // 5678
             position: "last"
@@ -598,6 +596,7 @@ print(sorted(a))`,
                 const validOrder =
                     Array.isArray(saved.stageOrder) &&
                     saved.stageOrder.length === TOTAL_STAGES &&
+                    new Set(saved.stageOrder).size === TOTAL_STAGES &&
                     saved.stageOrder.every((idx) => Number.isInteger(idx) && idx >= 0 && idx < TOTAL_STAGES);
 
                 if (
@@ -855,6 +854,11 @@ print(sorted(a))`,
 
     async function checkCurrentAnswer() {
         if (isStageSolved || gameOver || isChecking) return;
+        // Time already ran out (e.g. timer tick was delayed in background) - no late answers
+        if (Date.now() >= stageEndTime) {
+            updateTimerTick();
+            return;
+        }
         isChecking = true;
         try {
             // Check universal cheat code first before running normal validation
