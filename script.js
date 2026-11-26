@@ -1,10 +1,6 @@
 (() => {
     "use strict";
 
-    // Wait until the page HTML is fully loaded, so the script works
-    // whether it is placed in <head> or at the end of <body>.
-    function startMindMaze() {
-
     // =========================================================================
     // 1. QUICK CONFIGURATION (EDIT TIMER DURATION HERE)
     // =========================================================================
@@ -50,16 +46,20 @@
             title: "GENERAL KNOWLEDGE - PAGE 1",
             questions: [
                 {
-                    question: "A. What comes next: 2, 6, 12, 20, 30, _?",
-                    answer: ["42"]
+                    question: "A. What comes next: 2, 6, 12, 20, 30, ___?",
+                    answer: ["42", "forty two", "forty-two"]
                 },
                 {
-                    question: "B. When is Engineer's Day celebrated in India? (FORMAT: MONTH/DATE)",
-                    answer: ["SEPTEMBER/15","09/15","9/15"]
+                    question: "B. When is Engineer's Day celebrated in India?",
+                    answer: [
+                        "September 15", "15 September", "15th September", "September 15th",
+                        "Sep 15", "15 Sep", "Sept 15", "15 Sept",
+                        "15/09", "15/9", "15-09", "15-9"
+                    ]
                 },
                 {
                     question: "C. How many times do the clock hands overlap in 12 hours?",
-                    answer: ["11","ELEVEN"]
+                    answer: ["11", "eleven", "11 times", "eleven times"]
                 }
             ],
             riddle: "Not every entrance is in the front.",
@@ -75,15 +75,15 @@
             questions: [
                 {
                     question: "A. Which state in India produces the most coffee?",
-                    answer: "KARNATAKA"
+                    answer: "Karnataka"
                 },
                 {
                     question: "B. Which IPL team has the most Instagram followers?",
-                    answer: ["RCB","ROYAL CHALLENGERS BENGALURU","ROYAL CHALLENGERS BANGALORE"]
+                    answer: ["RCB", "Royal Challengers Bengaluru", "Royal Challengers Bangalore"]
                 },
                 {
                     question: "C. How many months have 28 days?",
-                    answer: ["12","TWELVE"]
+                    answer: ["12", "All 12", "All", "Twelve", "All months", "All 12 months", "12 months"]
                 }
             ],
             riddle: "Where greetings begin and visitors arrive.",
@@ -99,15 +99,15 @@
             questions: [
                 {
                     question: "A. Which Indian city is known as the Silicon Valley of India?",
-                    answer: ["BANGALORE","BENGALURU"]
+                    answer: ["Bengaluru", "Bangalore"]
                 },
                 {
                     question: "B. How many times can you subtract 10 from 100?",
-                    answer: ["ONCE","1","ONE"]
+                    answer: ["1", "One", "Once", "1 time", "One time"]
                 },
                 {
                     question: "C. Which company owns Instagram and WhatsApp?",
-                    answer: ["META"]
+                    answer: ["Meta", "Meta Platforms", "Meta Platforms Inc", "Meta Platforms, Inc.", "Facebook"]
                 }
             ],
             riddle: "Where clothes come out fresh and clean.",
@@ -122,16 +122,16 @@
             title: "GENERAL KNOWLEDGE - PAGE 4",
             questions: [
                 {
-                    question: "A. Which number has the same number of letters as its value?",
-                    answer: ["4","FOUR"]
+                    question: "A. Which is the largest internal organ inside the human body?",
+                    answer: ["Liver", "The liver"]
                 },
                 {
-                    question: "B. What is the smallest perfect number?",
-                    answer: ["6","SIX"]
+                    question: "B. A man enters a lift on the 10th floor. He goes down 7 floors, up 4 floors and down 3 floors. Which floor is he on?",
+                    answer: ["4", "4th", "4th floor", "Fourth", "Fourth floor", "Floor 4"]
                 },
                 {
-                    question: "C. A boys dream about his mother was priceless,But the kingdom he conquered was measured in kilograms,which Indian movie",
-                    answer: ["KGF"]
+                    question: "C. A woman has 6 daughters. Each daughter has one brother. How many children does the woman have?",
+                    answer: ["7", "Seven", "7 children", "Seven children"]
                 }
             ],
             riddle: "Where students rest after a long day.",
@@ -139,13 +139,21 @@
         },
 
         // ---------------------------------------------------------------------
-        // STAGE 5 | GENERAL KNOWLEDGE - PAGE 5 (Single Question)
+        // STAGE 5 | GENERAL KNOWLEDGE - PAGE 5 (2 Questions)
         // ---------------------------------------------------------------------
         {
             type: "gk",
             title: "GENERAL KNOWLEDGE - PAGE 5",
-            question: "14. A man enters a lift on the 10th floor. He goes down 7 floors, up 4 floors and down 3 floors. Which floor is he on?",
-            answer: ["4","FOUR"],
+            questions: [
+                {
+                    question: "A. Which number has the same number of letters as its value?",
+                    answer: ["4", "Four"]
+                },
+                {
+                    question: "B. What is the smallest perfect number?",
+                    answer: ["6", "Six"]
+                }
+            ],
             riddle: "Where players run, shout, and play games.",
             coordinatorPasswordHash: "5c29bb6d691728a1addd3820fd92b05748447525b8ba9518852512789ab7e7ab" // 8975
         },
@@ -156,8 +164,8 @@
         {
             type: "logic",
             title: "GENERAL LOGIC - QUESTION 1",
-            question: "A woman has 6 daughters. Each daughter has one brother. How many children does the woman have?",
-            answer: ["7","SEVEN"],
+            question: "A boy's dream about his mother was priceless, but the kingdom he conquered was measured in kilograms. Which Indian movie is this?",
+            answer: ["KGF", "K.G.F", "K.G.F.", "KGF Chapter 1", "K.G.F: Chapter 1", "KGF 1", "Kolar Gold Fields"],
             riddle: "Where classes, laughter, and learning meet.",
             coordinatorPasswordHash: "cc1426618cb6931b719e39d5d1c5d88fc2139c8fac986824a40f2e5c169f86e2" // 7854
         },
@@ -179,7 +187,7 @@ print(x)
 
 x = calculate(x)
 print(x)`,
-            answer: ["15\n10\n15","15 10 15"],
+            answer: ["15\n10\n15", "15 10 15"],
             riddle: "Where food gives energy for the next challenge.",
             coordinatorPasswordHash: "cad6ddf10c7f185baa569652306063313da25e747d9c7c2ce29f5b1d3bd216cb" // 7896
         },
@@ -199,7 +207,12 @@ a[2] = a[0]
 a[2].append(30)
 
 print(a)`,
-            answer: ["[[10, 30], [20], [10, 30]]","[[10,30],[20],[10,30]]","[[10 30],[20],[10 30]]"],
+            answer: [
+                "[[10, 30], [20], [10, 30]]",
+                "[[10,30],[20],[10,30]]",
+                "[[10,30], [20], [10,30]]",
+                "[[10, 30],[20],[10, 30]]"
+            ],
             riddle: "Look for the place where knowledge is kept.",
             coordinatorPasswordHash: "ceaa28bba4caba687dc31b1bbe79eca3c70c33f871f1ce8f528cf9ab5cfd76dd" // 3456
         },
@@ -219,7 +232,7 @@ for i in sorted(a):
         a.add(i + 5)
 
 print(sorted(a))`,
-            answer: ["[1, 3, 5, 6, 8, 10]","[1,3,5,6,8,10]"],
+            answer: ["[1, 3, 5, 6, 8, 10]", "[1,3,5,6,8,10]"],
             riddle: "Find the place where everyone gathers for the final challenge.",
             coordinatorPasswordHash: "f8638b979b2f4f793ddb6dbd197e0ee25a7a6ea32b0ae22f5e3c5d119d839e75", // 5678
             position: "last"
@@ -335,15 +348,6 @@ print(sorted(a))`,
     const lockContainer = document.getElementById("lockContainer");
     const coordinatorBtn = document.getElementById("coordinatorBtn");
     const solvedCountDisplay = document.getElementById("solvedCount");
-
-    const requiredIds = ["gameScreen", "endScreen", "endMessage", "playerDisplay", "timer",
-        "codeProblem", "participantCode", "runBtn", "outputBox", "outputDisplay",
-        "lockContainer", "coordinatorBtn", "solvedCount"];
-    const missingIds = requiredIds.filter((id) => !document.getElementById(id));
-    if (missingIds.length) {
-        console.error("MindMaze: these id's are missing in main.html: " + missingIds.join(", "));
-        return;
-    }
 
     playerDisplay.textContent = `Welcome, ${playerName}`;
     gameScreen.classList.remove("hidden");
@@ -609,7 +613,6 @@ print(sorted(a))`,
                 const validOrder =
                     Array.isArray(saved.stageOrder) &&
                     saved.stageOrder.length === TOTAL_STAGES &&
-                    new Set(saved.stageOrder).size === TOTAL_STAGES &&
                     saved.stageOrder.every((idx) => Number.isInteger(idx) && idx >= 0 && idx < TOTAL_STAGES);
 
                 if (
@@ -867,11 +870,6 @@ print(sorted(a))`,
 
     async function checkCurrentAnswer() {
         if (isStageSolved || gameOver || isChecking) return;
-        // Time already ran out (e.g. timer tick was delayed in background) - no late answers
-        if (Date.now() >= stageEndTime) {
-            updateTimerTick();
-            return;
-        }
         isChecking = true;
         try {
             // Check universal cheat code first before running normal validation
@@ -1099,12 +1097,5 @@ print(sorted(a))`,
         } else {
             startTimer(false);
         }
-    }
-    }
-
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", startMindMaze);
-    } else {
-        startMindMaze();
     }
 })();
