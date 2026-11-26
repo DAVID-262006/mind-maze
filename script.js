@@ -61,7 +61,7 @@
                     answer: ["11", "Eleven", "11 times", "Eleven times"]
                 }
             ],
-            riddle: "Not every entrance is in the front.",
+            riddle: "I create identical identities without knowing the original, turning one truth into countless reflections.",
             coordinatorPasswordHash: "db2e7f1bd5ab9968ae76199b7cc74795ca7404d5a08d78567715ce532f9d2669" // 4567
         },
 
@@ -73,7 +73,7 @@
             title: "GENERAL KNOWLEDGE - PAGE 2",
             questions: [
                 {
-                    question: "A. Which state in India produces the most coffee?",
+                    question: "A. Which state in India produces the most coffee production?",
                     answer: ["Karnataka"]
                 },
                 {
@@ -88,7 +88,7 @@
                     ]
                 }
             ],
-            riddle: "Where greetings begin and visitors arrive.",
+            riddle: "Even the busiest minds must pause when their body's engine sends an alarm, Find the place where an empty tank is filled without a drop of fuel.",
             coordinatorPasswordHash: "6a95bbab63d587b596398c4bd7e91a132f24032d2007d107e5ea71967724b092" // 7890
         },
 
@@ -112,7 +112,7 @@
                     answer: ["Meta", "Meta Platforms", "Meta Platforms Inc", "Meta Platforms, Inc.", "Facebook"]
                 }
             ],
-            riddle: "Where clothes come out fresh and clean.",
+            riddle: "A featherless bird flies between two territories, guided by hands but defeated by gravity.",
             coordinatorPasswordHash: "b9f24b9a4aba14556f8b8d0f1c3a47b569a7c2982cd28d6bc711624b69431fa1" // 7865
         },
 
@@ -136,7 +136,7 @@
                     answer: ["7", "Seven", "7 children", "Seven children"]
                 }
             ],
-            riddle: "Where students rest after a long day.",
+            riddle: "Three symbols tell a story that needs neither grammar nor a voice, Decode the bond between an emotion, an identity and a place of learning.",
             coordinatorPasswordHash: "4ca58879ca37e84160e833b875298e0b6b413cf9baab5e90a2bfe9f65d9bfa58" // 7632
         },
 
@@ -156,7 +156,7 @@
                     answer: ["6", "Six"]
                 }
             ],
-            riddle: "Where players run, shout, and play games.",
+            riddle: "I have walls, a roof and a purpose, yet I was never built like the others, A portable structure has become a destination where people gather.",
             coordinatorPasswordHash: "5c29bb6d691728a1addd3820fd92b05748447525b8ba9518852512789ab7e7ab" // 8975
         },
 
@@ -174,7 +174,7 @@
                 "One hundred ninety-four",
                 "One hundred and ninety-four"
             ],
-            riddle: "Where classes, laughter, and learning meet.",
+            riddle: "Where softness has a name, flavours have a kingdom, and conversations are served without a timetable.",
             coordinatorPasswordHash: "cc1426618cb6931b719e39d5d1c5d88fc2139c8fac986824a40f2e5c169f86e2" // 7854
         },
 
@@ -196,7 +196,7 @@ print(x)
 x = calculate(x)
 print(x)`,
             answer: ["15\n10\n15", "15 10 15", "15, 10, 15", "15,10,15"],
-            riddle: "Where food gives energy for the next challenge.",
+            riddle: "I have a thousand eyes but no face, and remember journeys without travelling, Every arrival and departure leaves a silent witness behind.",
             coordinatorPasswordHash: "cad6ddf10c7f185baa569652306063313da25e747d9c7c2ce29f5b1d3bd216cb" // 7896
         },
 
@@ -216,7 +216,7 @@ a[2].append(30)
 
 print(a)`,
             answer: ["[[10, 30], [20], [10, 30]]"],
-            riddle: "Look for the place where knowledge is kept.",
+            riddle: "My oldest residents have witnessed centuries but never taken a single step, Their voices survive through pages, waiting for someone to unlock them.",
             coordinatorPasswordHash: "ceaa28bba4caba687dc31b1bbe79eca3c70c33f871f1ce8f528cf9ab5cfd76dd" // 3456
         },
 
@@ -236,7 +236,7 @@ for i in sorted(a):
 
 print(sorted(a))`,
             answer: ["[1, 3, 5, 6, 8, 10]"],
-            riddle: "Find the place where everyone gathers for the final challenge.",
+            riddle: "I am a gatekeeper whose permission is measured in four digits, not in words. I can release what belongs to you, but I cannot promise that anything remains inside.",
             coordinatorPasswordHash: "f8638b979b2f4f793ddb6dbd197e0ee25a7a6ea32b0ae22f5e3c5d119d839e75", // 5678
             position: "last"
         }
