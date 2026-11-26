@@ -46,16 +46,16 @@
             title: "GENERAL KNOWLEDGE - PAGE 1",
             questions: [
                 {
-                    question: "A. What is the capital of India?",
-                    answer: ["New Delhi", "Delhi"]
+                    question: "A. What comes next: 2, 6, 12, 20, 30, _?",
+                    answer: ["42"]
                 },
                 {
-                    question: "B. What is the national animal of India?",
-                    answer: ["Tiger", "Bengal Tiger", "Royal Bengal Tiger"]
+                    question: "B. When is Engineer's Day celebrated in India? (FORMAT: MONTH/DATE)",
+                    answer: ["SEPTEMBER/15","09/15","9/15"]
                 },
                 {
-                    question: "C. Who wrote India's national anthem?",
-                    answer: ["Rabindranath Tagore", "Tagore", "R N Tagore", "R. N. Tagore", "Rabindra Nath Tagore"]
+                    question: "C. How many times do the clock hands overlap in 12 hours?",
+                    answer: ["11","ELEVEN"]
                 }
             ],
             riddle: "Not every entrance is in the front.",
@@ -70,20 +70,17 @@
             title: "GENERAL KNOWLEDGE - PAGE 2",
             questions: [
                 {
-                    question: "A. Which planet is known as the Red Planet?",
-                    answer: "Mars"
+                    question: "A. Which state in India produces the most coffee prodution?",
+                    answer: "KARNATAKA"
                 },
                 {
-                    question: "B. At what temperature does water boil in Celsius at standard atmospheric pressure?",
-                    answer: [
-                        "100", "100c", "100 c", "100°c", "100 °c",
-                        "100 degree", "100 degrees", "100 degree c", "100 degrees c",
-                        "100 degree celsius", "100 degrees celsius", "100 celsius", "hundred"
+                    question: "B. Which IPL team has the most Instagram followers?",
+                    answer: ["RCB","ROYAL CHALLENGERS BENGALURU"
                     ]
                 },
                 {
-                    question: "C. Which part of a plant mainly performs photosynthesis?",
-                    answer: ["Leaves", "Leaf"]
+                    question: "C. How many months have 28 days?",
+                    answer: ["12","TWELVE"]
                 }
             ],
             riddle: "Where greetings begin and visitors arrive.",
@@ -98,16 +95,16 @@
             title: "GENERAL KNOWLEDGE - PAGE 3",
             questions: [
                 {
-                    question: "A. Which is the largest planet in our solar system?",
-                    answer: "Jupiter"
+                    question: "A. Which Indian city is known as the Silicon Valley of India?",
+                    answer: ["BANGALORE","BENGALURU"]
                 },
                 {
-                    question: "B. How many days are there in a week?",
-                    answer: ["7", "Seven"]
+                    question: "B. How many times can you subtract 10 from 100?",
+                    answer: ["ONCE","1","ONE"]
                 },
                 {
-                    question: "C. Which is the largest ocean in the world?",
-                    answer: ["Pacific Ocean", "Pacific"]
+                    question: "C. Which company owns Instagram and WhatsApp?",
+                    answer: ["META"]
                 }
             ],
             riddle: "Where clothes come out fresh and clean.",
@@ -122,16 +119,16 @@
             title: "GENERAL KNOWLEDGE - PAGE 4",
             questions: [
                 {
-                    question: "A. What is the brain of a computer called?",
-                    answer: ["CPU", "Central Processing Unit"]
+                    question: "A. Which number has the same number of letters as its value?",
+                    answer: ["4","FOUR"]
                 },
                 {
-                    question: "B. What does HTML stand for?",
-                    answer: ["HyperText Markup Language", "Hyper Text Markup Language"]
+                    question: "B. What is the smallest perfect number?",
+                    answer: ["6","SIX"]
                 },
                 {
-                    question: "C. Which device is commonly used to type text into a computer?",
-                    answer: ["Keyboard", "Keyboards"]
+                    question: "C. A boys dream about his mother was priceless,But the kingdom he conquered was measured in kilograms,which Indian movie",
+                    answer: ["KGF"]
                 }
             ],
             riddle: "Where students rest after a long day.",
@@ -144,8 +141,9 @@
         {
             type: "gk",
             title: "GENERAL KNOWLEDGE - PAGE 5",
-            question: "Which is the hardest natural substance on Earth?",
-            answer: ["Diamond", "Diamonds"],
+            question: "14. A man enters a lift on the 10th floor. He goes down 7 floors, up 4 floors and down 3 floors. Which floor is he on?
+",
+            answer: ["4","FOUR"],
             riddle: "Where players run, shout, and play games.",
             coordinatorPasswordHash: "5c29bb6d691728a1addd3820fd92b05748447525b8ba9518852512789ab7e7ab" // 8975
         },
@@ -156,8 +154,8 @@
         {
             type: "logic",
             title: "GENERAL LOGIC - QUESTION 1",
-            question: "I am an odd number. Remove one letter and I become even. What number am I?",
-            answer: ["seven", "7"],
+            question: "A woman has 6 daughters. Each daughter has one brother. How many children does the woman have?",
+            answer: ["7","SEVEN"],
             riddle: "Where classes, laughter, and learning meet.",
             coordinatorPasswordHash: "cc1426618cb6931b719e39d5d1c5d88fc2139c8fac986824a40f2e5c169f86e2" // 7854
         },
@@ -168,13 +166,18 @@
         {
             type: "programming",
             title: "PROGRAMMING OUTPUT - QUESTION 1",
-            code: `age = 20
+            code: `x = 10
 
-if age >= 18:
-    print("You are eligible to vote.")
-else:
-    print("You are not eligible to vote.")`,
-            answer: ["You are eligible to vote.", "You are eligible to vote"],
+def calculate(x):
+    x = x + 5
+    return x
+
+print(calculate(x))
+print(x)
+
+x = calculate(x)
+print(x)`,
+            answer: ["15\n10\n15","15 10 15"],
             riddle: "Where food gives energy for the next challenge.",
             coordinatorPasswordHash: "cad6ddf10c7f185baa569652306063313da25e747d9c7c2ce29f5b1d3bd216cb" // 7896
         },
@@ -185,12 +188,16 @@ else:
         {
             type: "programming",
             title: "PROGRAMMING OUTPUT - QUESTION 2",
-            code: `x = 10
-y = 5
+            code: `a = [[], [], []]
 
-print(x + y)
-print(x * y)`,
-            answer: ["15\n50", "15 50"],
+a[0].append(10)
+a[1].append(20)
+a[2] = a[0]
+
+a[2].append(30)
+
+print(a)`,
+            answer: ["[[10,30],[20],[10,30]]","[[10 30],[20],[10 30]]"],
             riddle: "Look for the place where knowledge is kept.",
             coordinatorPasswordHash: "ceaa28bba4caba687dc31b1bbe79eca3c70c33f871f1ce8f528cf9ab5cfd76dd" // 3456
         },
@@ -201,9 +208,16 @@ print(x * y)`,
         {
             type: "programming",
             title: "PROGRAMMING OUTPUT - QUESTION 3",
-            code: `for i in range(1, 4):
-    print(i * 2)`,
-            answer: ["2\n4\n6", "2 4 6"],
+            code: `a = {1, 2, 3, 4, 5}
+
+for i in sorted(a):
+    if i % 2 == 0:
+        a.discard(i)
+    else:
+        a.add(i + 5)
+
+print(sorted(a))`,
+            answer: ["[1,3,5,6,8,10]","[1,3,5,6,8,10]"],
             riddle: "Find the place where everyone gathers for the final challenge.",
             coordinatorPasswordHash: "f8638b979b2f4f793ddb6dbd197e0ee25a7a6ea32b0ae22f5e3c5d119d839e75", // 5678
             position: "last"
