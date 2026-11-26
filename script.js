@@ -30,8 +30,6 @@
     // so players can't read them from the code. Real passwords are written
     // in the comment next to each hash. DELETE THOSE COMMENTS before you push
     // to GitHub (or keep your own private copy with the passwords).
-    // To change a password: hash the new password with any SHA-256 tool
-    // and paste the 64-character hash.
     //
     // ORDER: stages are shuffled for every player. A stage with
     // position: "last" always comes last (used for the final gathering riddle).
@@ -53,9 +51,9 @@
                     question: "B. When is Engineer's Day celebrated in India?",
                     answer: [
                         "September 15", "15 September", "15th September", "September 15th",
-                        "Sept 15", "15 Sept", "15th Sept", "Sept 15th",
+                        "15th of September", "Sept 15", "15 Sept", "15th Sept", "Sept 15th",
                         "Sep 15", "15 Sep", "15th Sep", "Sep 15th",
-                        "15/09", "15/9", "15-09", "15-9"
+                        "15/09", "15/9", "15-09", "15-9", "15.09", "15.9"
                     ]
                 },
                 {
@@ -107,7 +105,7 @@
                 },
                 {
                     question: "B. How many times can you subtract 10 from 100?",
-                    answer: ["1", "One", "Once", "1 time", "One time", "Only once"]
+                    answer: ["1", "One", "Once", "1 time", "One time", "Only once", "Only 1 time", "Only one time"]
                 },
                 {
                     question: "C. Which company owns Instagram and WhatsApp?",
@@ -168,8 +166,14 @@
         {
             type: "logic",
             title: "GENERAL LOGIC - QUESTION 1",
-            question: "I am a three digit number .My tens digit is five more than my units digit .My hundreds digit is eight less than my tens digit .What am 1",
-            answer: ["194"],
+            question: "I am a three-digit number. My tens digit is five more than my units digit. My hundreds digit is eight less than my tens digit. What am I?",
+            answer: [
+                "194",
+                "One hundred ninety four",
+                "One hundred and ninety four",
+                "One hundred ninety-four",
+                "One hundred and ninety-four"
+            ],
             riddle: "Where classes, laughter, and learning meet.",
             coordinatorPasswordHash: "cc1426618cb6931b719e39d5d1c5d88fc2139c8fac986824a40f2e5c169f86e2" // 7854
         },
@@ -211,11 +215,7 @@ a[2] = a[0]
 a[2].append(30)
 
 print(a)`,
-            answer: [
-                "[[10, 30], [20], [10, 30]]",
-                "[[10,30],[20],[10,30]]",
-                "[[10, 30],[20],[10, 30]]"
-            ],
+            answer: ["[[10, 30], [20], [10, 30]]"],
             riddle: "Look for the place where knowledge is kept.",
             coordinatorPasswordHash: "ceaa28bba4caba687dc31b1bbe79eca3c70c33f871f1ce8f528cf9ab5cfd76dd" // 3456
         },
@@ -235,7 +235,7 @@ for i in sorted(a):
         a.add(i + 5)
 
 print(sorted(a))`,
-            answer: ["[1, 3, 5, 6, 8, 10]", "[1,3,5,6,8,10]"],
+            answer: ["[1, 3, 5, 6, 8, 10]"],
             riddle: "Find the place where everyone gathers for the final challenge.",
             coordinatorPasswordHash: "f8638b979b2f4f793ddb6dbd197e0ee25a7a6ea32b0ae22f5e3c5d119d839e75", // 5678
             position: "last"
@@ -266,23 +266,28 @@ print(sorted(a))`,
     const playerName = storedName;
 
     // =========================================================================
-    // 5. SHA-256 HELPER (built-in crypto, with a fallback for plain-HTTP testing)
+    // 5. SHA-256 HELPER (built-in crypto, with exact NIST fallback for HTTP)
     // =========================================================================
+    const SHA256_K = [
+        0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+        0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+        0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+        0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+        0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+        0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+        0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+        0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
+    ];
+
     function sha256Fallback(text) {
         const rightRotate = (v, n) => (v >>> n) | (v << (32 - n));
         const bytes = Array.from(new TextEncoder().encode(text));
         const bitLen = bytes.length * 8;
 
-        const H = [];
-        const K = [];
-        const isComposite = {};
-        for (let c = 2; K.length < 64; c++) {
-            if (!isComposite[c]) {
-                for (let i = c * c; i < 313; i += c) isComposite[i] = true;
-                if (H.length < 8) H.push((Math.pow(c, 1 / 2) * 4294967296) | 0);
-                K.push((Math.pow(c, 1 / 3) * 4294967296) | 0);
-            }
-        }
+        const H = [
+            0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
+            0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19
+        ];
 
         bytes.push(0x80);
         while (bytes.length % 64 !== 56) bytes.push(0);
@@ -305,7 +310,7 @@ print(sorted(a))`,
             for (let i = 0; i < 64; i++) {
                 const S1 = rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25);
                 const ch = (e & f) ^ (~e & g);
-                const t1 = (h + S1 + ch + K[i] + w[i]) | 0;
+                const t1 = (h + S1 + ch + SHA256_K[i] + w[i]) | 0;
                 const S0 = rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22);
                 const maj = (a & b) ^ (a & c) ^ (b & c);
                 const t2 = (S0 + maj) | 0;
@@ -355,12 +360,26 @@ print(sorted(a))`,
     playerDisplay.textContent = `Welcome, ${playerName}`;
     gameScreen.classList.remove("hidden");
 
+    // Disable browser autofill / suggestions / Grammarly on the main answer box
+    function hardenInputAttributes(el) {
+        if (!el) return;
+        el.setAttribute("autocomplete", "off");
+        el.setAttribute("autocorrect", "off");
+        el.setAttribute("autocapitalize", "off");
+        el.setAttribute("spellcheck", "false");
+        el.setAttribute("data-gramm", "false");
+        el.setAttribute("data-gramm_editor", "false");
+        el.setAttribute("data-enable-grammarly", "false");
+    }
+    hardenInputAttributes(participantCode);
+
     // =========================================================================
-    // 7. ANTI-COPY & ANTI-PASTE PROTECTION (DESKTOP + MOBILE)
-    // Mobile-friendly: keyboard suggestions, swipe typing and autocorrect
-    // (which insert a whole word at once) are allowed. Real pastes are blocked.
+    // 7. STRICT ANTI-COPY & ANTI-PASTE PROTECTION (DESKTOP + MOBILE CLIPBOARD)
+    // Blocks copy, cut, paste, drag-drop, middle-click paste, long-press OS
+    // selection, autofill, keyboard suggestions, swipe & Gboard/Samsung
+    // clipboard bar insertions. Allows normal 1-char-at-a-time manual typing.
     // =========================================================================
-    const PASTE_THRESHOLD = 12; // inserting more than this many chars at once = paste
+    const MAX_CHARS_PER_INPUT = 1; // Anything > 1 char at once = paste/clipboard/suggestion
     const lastValidValues = new WeakMap();
 
     function isPlayerAnswerField(el) {
@@ -389,15 +408,56 @@ print(sorted(a))`,
     }
 
     (function enableAntiCopyPaste() {
-        const blockEvent = (e) => {
-            e.preventDefault();
-            return false;
+        // Inject CSS to kill OS text selection & mobile long-press copy popups
+        const style = document.createElement("style");
+        style.textContent = `
+            html, body, #codeProblem, #outputBox, #outputDisplay {
+                -webkit-user-select: none !important;
+                -moz-user-select: none !important;
+                -ms-user-select: none !important;
+                user-select: none !important;
+                -webkit-touch-callout: none !important;
+            }
+            input, textarea {
+                -webkit-user-select: text !important;
+                user-select: text !important;
+                -webkit-touch-callout: none !important;
+            }
+        `;
+        document.head.appendChild(style);
+
+        const warnNoCopyPaste = () => {
+            if (!isStageSolved && !gameOver) {
+                showIncorrectFeedback("Copy & paste is disabled! Please type your answer manually.");
+            }
         };
 
-        // Block copy, cut, paste, drag-drop, and right-click menu globally
-        ["copy", "cut", "paste", "drop", "dragstart", "contextmenu"].forEach((evt) => {
-            document.addEventListener(evt, blockEvent, true);
+        // Block copy, cut, paste, drop, dragover, dragstart, and right-click menu globally
+        ["copy", "cut", "paste", "drop", "dragover", "dragstart", "contextmenu"].forEach((evt) => {
+            document.addEventListener(evt, (e) => {
+                e.preventDefault();
+                if ((evt === "copy" || evt === "cut") && e.clipboardData) {
+                    try { e.clipboardData.setData("text/plain", ""); } catch { /* ignore */ }
+                }
+                if ((evt === "paste" || evt === "drop") && isPlayerAnswerField(e.target)) {
+                    warnNoCopyPaste();
+                }
+                return false;
+            }, true);
         });
+
+        // Block middle-click paste on Linux/desktop browsers
+        document.addEventListener("mousedown", (e) => {
+            if (e.button === 1 && isPlayerAnswerField(e.target)) {
+                e.preventDefault();
+                warnNoCopyPaste();
+            }
+        }, true);
+        document.addEventListener("auxclick", (e) => {
+            if (e.button === 1 && isPlayerAnswerField(e.target)) {
+                e.preventDefault();
+            }
+        }, true);
 
         // Block text selection on questions and riddles
         document.addEventListener("selectstart", (e) => {
@@ -414,63 +474,102 @@ print(sorted(a))`,
             }
         });
 
-        // Block real pastes / drops (including Gboard / Samsung clipboard bar)
+        // Block paste, drop, yank, redo, and keyboard suggestion/clipboard replacements
+        const BLOCKED_INPUT_TYPES = new Set([
+            "insertFromPaste",
+            "insertFromPasteAsQuotation",
+            "insertFromDrop",
+            "insertFromYank",
+            "insertReplacementText",
+            "historyRedo"
+        ]);
+
         document.addEventListener("beforeinput", (e) => {
             if (!isPlayerAnswerField(e.target)) return;
 
-            const isPasteType =
-                e.inputType === "insertFromPaste" ||
-                e.inputType === "insertFromPasteAsQuotation" ||
-                e.inputType === "insertFromDrop";
+            const isBlockedType = BLOCKED_INPUT_TYPES.has(e.inputType);
+            const isMultiCharDirectInsert =
+                e.inputType === "insertText" &&
+                typeof e.data === "string" &&
+                e.data.length > MAX_CHARS_PER_INPUT;
 
-            if (isPasteType) {
+            if (isBlockedType || isMultiCharDirectInsert) {
                 e.preventDefault();
-                if (!isStageSolved) {
-                    showIncorrectFeedback("Copy & paste is disabled! Please type your answer manually.");
-                }
+                warnNoCopyPaste();
             }
         }, true);
 
-        // Fallback shield for clipboard bars that bypass paste & beforeinput
+        // Strict fallback shield: catches Gboard/Samsung clipboard bars, swipe typing,
+        // voice dictation, and browser autofill that bypass paste/beforeinput events
         document.addEventListener("input", (e) => {
             const target = e.target;
             if (!isPlayerAnswerField(target)) return;
 
             const prevVal = lastValidValues.get(target) ?? "";
             const currentVal = target.value;
+            const inserted = countInsertedChars(prevVal, currentVal);
 
-            if (countInsertedChars(prevVal, currentVal) > PASTE_THRESHOLD) {
+            if (inserted > MAX_CHARS_PER_INPUT) {
                 target.value = prevVal;
-                try {
-                    const pos = prevVal.length;
-                    target.setSelectionRange(pos, pos);
-                } catch { /* ignore */ }
+
+                // Cleanly reset Android IME composition state if paste happened via IME
+                if (e.isComposing) {
+                    target.blur();
+                    requestAnimationFrame(() => {
+                        if (!target.disabled) {
+                            target.focus();
+                            try {
+                                const pos = prevVal.length;
+                                target.setSelectionRange(pos, pos);
+                            } catch { /* ignore */ }
+                        }
+                    });
+                } else {
+                    try {
+                        const pos = prevVal.length;
+                        target.setSelectionRange(pos, pos);
+                    } catch { /* ignore */ }
+                }
 
                 e.stopImmediatePropagation();
-                if (!isStageSolved) {
-                    showIncorrectFeedback("Copy & paste is disabled! Please type your answer manually.");
-                }
+                warnNoCopyPaste();
                 return;
             }
 
             lastValidValues.set(target, currentVal);
         }, true);
 
-        // Block keyboard shortcuts: Ctrl/Cmd + C, V, X, U, S and Shift+Insert.
-        // Ctrl/Cmd + A is allowed only inside answer boxes.
+        // Block copy/paste/save/print/view-source/DevTools keyboard shortcuts
         document.addEventListener("keydown", (e) => {
             const key = (e.key || "").toLowerCase();
+
+            if (e.key === "F12") {
+                e.preventDefault();
+                return;
+            }
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && ["i", "j", "c"].includes(key)) {
+                e.preventDefault();
+                return;
+            }
             if (e.ctrlKey || e.metaKey) {
-                if (["c", "v", "x", "u", "s"].includes(key)) {
+                if (["c", "v", "x", "u", "s", "p"].includes(key)) {
                     e.preventDefault();
+                    if (key === "v" && isPlayerAnswerField(document.activeElement)) {
+                        warnNoCopyPaste();
+                    }
+                    return;
                 }
                 if (key === "a" && !isPlayerAnswerField(document.activeElement)
                     && document.activeElement?.id !== "coordPassInput") {
                     e.preventDefault();
+                    return;
                 }
             }
-            if (e.shiftKey && e.key === "Insert") {
+            if ((e.shiftKey || e.ctrlKey) && e.key === "Insert") {
                 e.preventDefault();
+                if (e.shiftKey && isPlayerAnswerField(document.activeElement)) {
+                    warnNoCopyPaste();
+                }
             }
         }, true);
     })();
@@ -616,6 +715,7 @@ print(sorted(a))`,
                 const validOrder =
                     Array.isArray(saved.stageOrder) &&
                     saved.stageOrder.length === TOTAL_STAGES &&
+                    new Set(saved.stageOrder).size === TOTAL_STAGES &&
                     saved.stageOrder.every((idx) => Number.isInteger(idx) && idx >= 0 && idx < TOTAL_STAGES);
 
                 if (
@@ -656,6 +756,46 @@ print(sorted(a))`,
         return stages[stageOrder[currentStage]];
     }
 
+    // Keep multiple tabs synced so a second tab cannot bypass timeout or progress
+    window.addEventListener("storage", (e) => {
+        if (e.key !== STATE_KEY || !e.newValue) return;
+        try {
+            const updated = JSON.parse(e.newValue);
+            if (!updated || updated.playerName !== playerName) return;
+
+            if (updated.finished) {
+                solvedCount = Number.isInteger(updated.solvedCount) ? updated.solvedCount : solvedCount;
+                endGame(Boolean(updated.win));
+                return;
+            }
+
+            if (
+                Number.isInteger(updated.currentStage) &&
+                updated.currentStage !== currentStage &&
+                updated.currentStage >= 0 &&
+                updated.currentStage < TOTAL_STAGES
+            ) {
+                currentStage = updated.currentStage;
+                solvedCount = Number.isInteger(updated.solvedCount) ? updated.solvedCount : solvedCount;
+                stageEndTime = Number(updated.stageEndTime) || stageEndTime;
+                remainingMsWhenSolved = typeof updated.remainingMsWhenSolved === "number"
+                    ? updated.remainingMsWhenSolved
+                    : STAGE_DURATION_MS;
+                showStage();
+                if (updated.isStageSolved) {
+                    revealRiddle(true);
+                } else {
+                    startTimer(false);
+                }
+            } else if (updated.isStageSolved && !isStageSolved) {
+                remainingMsWhenSolved = typeof updated.remainingMsWhenSolved === "number"
+                    ? updated.remainingMsWhenSolved
+                    : remainingMsWhenSolved;
+                revealRiddle(true);
+            }
+        } catch { /* ignore */ }
+    });
+
     // =========================================================================
     // 11. ANSWER VALIDATION
     // =========================================================================
@@ -666,14 +806,23 @@ print(sorted(a))`,
             .toLowerCase();
     }
 
-    function isAnswerMatch(userInput, expected) {
+    // For Python list/output answers, ignore harmless space differences around , [ ] ( )
+    function normalizeCodeAnswer(val) {
+        return normalizeAnswer(val).replace(/\s*([,\[\]()])\s*/g, "$1");
+    }
+
+    function isAnswerMatch(userInput, expected, isProgramming = false) {
         const cleaned = normalizeAnswer(userInput);
         if (!cleaned) return false;
 
-        if (Array.isArray(expected)) {
-            return expected.some((ans) => normalizeAnswer(ans) === cleaned);
+        const list = Array.isArray(expected) ? expected : [expected];
+        if (isProgramming) {
+            const cleanedCode = normalizeCodeAnswer(userInput);
+            return list.some((ans) =>
+                normalizeAnswer(ans) === cleaned || normalizeCodeAnswer(ans) === cleanedCode
+            );
         }
-        return cleaned === normalizeAnswer(expected);
+        return list.some((ans) => normalizeAnswer(ans) === cleaned);
     }
 
     // =========================================================================
@@ -754,11 +903,9 @@ print(sorted(a))`,
                 const input = document.createElement("input");
                 input.type = "text";
                 input.id = `gkAnswer${index}`;
+                input.name = `mindmaze_s${currentStage}_q${index}`;
                 input.placeholder = `Enter answer ${letter}`;
-                input.setAttribute("autocomplete", "off");
-                input.setAttribute("autocorrect", "off");
-                input.setAttribute("autocapitalize", "off");
-                input.setAttribute("spellcheck", "false");
+                hardenInputAttributes(input);
                 input.style.cssText = "width:100%;max-width:100%;box-sizing:border-box;text-align:left;";
                 lastValidValues.set(input, "");
 
@@ -861,7 +1008,7 @@ print(sorted(a))`,
 
     // Snap timer immediately when player wakes phone or switches back to tab
     document.addEventListener("visibilitychange", () => {
-        if (!document.hidden && !isStageSolved && timerId !== null) {
+        if (!document.hidden && !isStageSolved && !gameOver && timerId !== null) {
             updateTimerTick();
         }
     });
@@ -889,7 +1036,7 @@ print(sorted(a))`,
                 stage.questions.forEach((q, index) => {
                     const input = document.getElementById(`gkAnswer${index}`);
                     const letter = String.fromCharCode(65 + index);
-                    if (input && isAnswerMatch(input.value, q.answer)) {
+                    if (input && isAnswerMatch(input.value, q.answer, false)) {
                         feedback.push(`${letter}: CORRECT`);
                     } else {
                         allCorrect = false;
@@ -905,13 +1052,13 @@ print(sorted(a))`,
                     );
                 }
             } else if (stage.type === "gk" || stage.type === "logic") {
-                if (isAnswerMatch(participantCode.value, stage.answer)) {
+                if (isAnswerMatch(participantCode.value, stage.answer, false)) {
                     revealRiddle(false);
                 } else {
                     showIncorrectFeedback("Incorrect answer! Try again.");
                 }
             } else if (stage.type === "programming") {
-                if (isAnswerMatch(participantCode.value, stage.answer)) {
+                if (isAnswerMatch(participantCode.value, stage.answer, true)) {
                     revealRiddle(false);
                 } else {
                     showIncorrectFeedback("Incorrect output! Predict again and try.");
@@ -925,6 +1072,14 @@ print(sorted(a))`,
     // Clear error feedback immediately when player edits their input
     participantCode.addEventListener("input", () => clearFeedback(false));
     answerFields.addEventListener("input", () => clearFeedback(false));
+
+    // Submit on Enter if participantCode is a single-line input (keeps Enter for newlines in textarea)
+    participantCode.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && participantCode.tagName === "INPUT") {
+            e.preventDefault();
+            checkCurrentAnswer();
+        }
+    });
 
     // Smooth Enter-key navigation across GK input fields
     answerFields.addEventListener("keydown", (e) => {
