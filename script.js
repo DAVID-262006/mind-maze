@@ -168,11 +168,8 @@
         {
             type: "logic",
             title: "GENERAL LOGIC - QUESTION 1",
-            question: "A boy's dream about his mother was priceless, but the kingdom he conquered was measured in kilograms. Which Indian movie is this?",
-            answer: [
-                "KGF", "K.G.F", "K.G.F.", "K G F",
-                "KGF Chapter 1", "KGF: Chapter 1", "K.G.F: Chapter 1", "Kolar Gold Fields"
-            ],
+            question: "I am a three digit number .My tens digit is five more than my units digit .My hundreds digit is eight less than my tens digit .What am 1",
+            answer: ["194"],
             riddle: "Where classes, laughter, and learning meet.",
             coordinatorPasswordHash: "cc1426618cb6931b719e39d5d1c5d88fc2139c8fac986824a40f2e5c169f86e2" // 7854
         },
